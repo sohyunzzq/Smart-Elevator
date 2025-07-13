@@ -69,13 +69,16 @@
 
 - 각 층의 카메라가 대기자를 인식  
 - 사람이 없으면 해당 층의 외부 버튼 자동 해제  
-- 촬영된 이미지를 화면에 표시해, 사용자가 엘리베이터를 기다릴지 판단할 수 있도록 지원
+- 촬영된 이미지를 화면에 표시해, 사용자가 엘리베이터를 기다릴지 판단할 수 있도록 지원  
+<img width="385" height="370" alt="image" src="https://github.com/user-attachments/assets/23c9ee7f-6e4b-4822-9e3b-6540ea27e93b" />  
+
+> 동서남북 방향으로 4개의 카메라를 설치하고 멀티 카메라 모듈로 연결해 사람을 인식한다.  
 
 ---
 
 ## 🔌 하드웨어 구성 및 회로도  
-![image](https://github.com/user-attachments/assets/0c38af7f-fed0-4bc4-8aee-ad969b5a84c4)
-- 위와 같이, 엘리베이터 동작용 Raspberry Pi 1대, 무게 감지용 Raspberry Pi 1대 따로 둠.
+![image](https://github.com/user-attachments/assets/0c38af7f-fed0-4bc4-8aee-ad969b5a84c4)  
+> 위와 같이, 엘리베이터 동작용 Raspberry Pi 1대, 무게 감지용 Raspberry Pi 1대 따로 두었다.
 
 ![image](https://github.com/user-attachments/assets/accd51c4-7596-4958-923d-59503172b3b9)
 
@@ -91,7 +94,13 @@
 --- 
 
 ## 📷 시연 영상 및 결과 화면  
-> 동작 영상, 출력 결과 사진, 작동 장면 등
+<img width="270" height="270" alt="image" src="https://github.com/user-attachments/assets/ea904192-f1f8-4b46-8ec7-f321dc776978" />
+<img width="270" height="270" alt="image" src="https://github.com/user-attachments/assets/19196569-53e9-404a-8ad5-c031ec1647d2" />
+<img width="270" height="270" alt="image" src="https://github.com/user-attachments/assets/40afbad3-56a7-4ed4-a4db-bd5b366a2017" />  
+
+> 로드셀 센서가 인식하는 무게에 따라, 현재 몇 명이 더 탈 수 있고(5명 정원), 내부 혼잡도가 어떤지 LCD에 출력된다.
+
+
 
 ---
 
