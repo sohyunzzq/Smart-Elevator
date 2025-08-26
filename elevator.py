@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import threading
 import time
 import tkinter as tk
+from detection import camera
 
 # ========================== USER SETTINGS ===========================
 
@@ -12,6 +13,10 @@ import tkinter as tk
 buttons = [13, 26, 21, 19, 25, 24, 23, 16, 12, 18]
 
 # ========================== DON'T EDIT ==============================
+# ========================== global variables ==========================
+
+det1, det2, det3, det4 = 0, 0, 0, 0
+
 # ========================== basic settings ==========================
 
 GPIO.setmode(GPIO.BCM)
@@ -62,6 +67,43 @@ down = [0, 0, 0]  # 4, 3, 2
 dest = 1
 
 # ========================== functions ==========================
+
+# 사람 수 측정
+def detect_people():
+    global mode, det1, det2, det3, det4, up, down
+    
+    dets = [det1, det2, det3, det4]
+
+    while True:
+        for i in range(4):
+            dets[i] = camera(i)
+        
+# 사람이 없으면 요청 제거 및 정지
+def no_person():
+    global det1, det2, det3, det4, mode, up, down, dest
+    
+    while True:            
+        if det1 == 0:
+            up[1] = 0
+            if dest == 1:
+                mode = IDLE
+
+        if det2 == 0:
+            up[1] = 0
+            down[2] = 0
+            if dest == 2:
+                mode = IDLE
+
+        if det3 == 0:
+            up[2] = 0
+            down[1] = 0
+            if dest == 3:
+                mode = IDLE
+
+        if det4 == 0:
+            down[0] = 0
+            if dest == 4:
+                mode = IDLE
 
 # 현재 층수 시각화 라벨 업데이트
 def update_display():
@@ -210,7 +252,12 @@ def while_loop():
 
 def main():
     while_thread = threading.Thread(target=while_loop)
+    detect_thread = threading.Thread(target=detect_people)
+    no_person_thread = threading.Thread(target=no_person)
+    
     while_thread.start()
+    detect_thread.start()
+    no_person_thread.start()
 
     # 버튼 감지 콜백 등록
     callbacks = [one, two, three, four, one_up, two_up, three_up, two_down, three_down, four_down]
